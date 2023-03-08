@@ -4,3 +4,4 @@
 -[ Moving Rectangle]()
 
 ## Projects
+- [Arrays and Object Notation](array-assignment)
