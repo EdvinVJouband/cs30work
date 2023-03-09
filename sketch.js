@@ -28,6 +28,6 @@ function diagonalLine(x, y, spacing) {
   }
   else{
     // negative slope
-    line(x - spacing/2, y - spacing/2, x + spacing/2, y + spacing/2)
+    line(x - spacing/2, y - spacing/2, x + spacing/2, y + spacing/2);
   }
 }
