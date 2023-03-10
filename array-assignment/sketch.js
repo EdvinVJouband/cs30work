@@ -13,3 +13,9 @@ function setup() {
 function draw() {
   background(220);
 }
+
+function drawShape() {
+  beginShape();
+  vertex(100, 100);
+  
+}
