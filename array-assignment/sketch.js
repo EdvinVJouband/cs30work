@@ -17,5 +17,5 @@ function draw() {
 function drawShape() {
   beginShape();
   vertex(100, 100);
-  
+  vertex()
 }
