@@ -2,6 +2,7 @@
 
 ## Demos
 -[Moving Rectangle]()
+-[Generitive Art]()
 -[Terrain Generation](07-terrain)
 
 ## Projects
