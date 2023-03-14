@@ -2,6 +2,7 @@
 
 ## Demos
 -[Moving Rectangle]()
+-[Terrain Generation](07-terrain)
 
 ## Projects
 - [Arrays and Object Notation](array-assignment)
