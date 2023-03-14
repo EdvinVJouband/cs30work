@@ -12,12 +12,17 @@ function setup() {
 
 function draw() {
   background(220);
+  drawShape();
+  rect(100, 100, 100);
 }
 
 function drawShape() {
   beginShape();
   vertex(100, 100);
-  vertex(50, 50)
+  vertex(50, 50);
+  vertex(100, 50);
+  vertex(50, 100);
   endShape();
+  circle(100, 100, 100);
 }
 
