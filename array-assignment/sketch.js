@@ -5,6 +5,10 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
+let circles = [];
+
+let diameter = 200;
+let radius = diameter/2;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -13,17 +17,28 @@ function setup() {
 function draw() {
   background(220);
   drawShape();
+  calculatePoint(mouseX);
 }
 
 function drawShape() {
-  let diameter = 200;
   circle(width/2, height/2, diameter);
   strokeWeight(5);
   point(width/2, height/2);
   strokeWeight(1);
-  let y = 100 * cos(45);
-  console.log(y);
-  line(width/2, height/2, width/2 + y, height/2);
+}
+
+function calculatePoint(angle) {
+  angleMode(DEGREES);
+  strokeWeight(5);
+  let adjacentSide = radius * cos(angle);
+  let opositeSide = radius * sin(angle);
+  point(width/2 + adjacentSide, height/2 - opositeSide);
+  console.log(mouseX);
+  strokeWeight(1);
+}
+
+function drawCircle(theAngle) {
+
 }
 
 // beginShape();
@@ -32,6 +47,16 @@ function drawShape() {
 // vertex(100, 50);
 // vertex(50, 100);
 // endShape();
+
+// function calculatePoint(angle) {
+//   angleMode(DEGREES);
+//   let adjacentSide = radius * cos(angle);
+//   let opositeSide = radius * sin(angle);
+//   line(width/2, height/2, width/2 + adjacentSide, height/2);
+//   line(width/2 + adjacentSide, height/2, width/2 + adjacentSide, height/2 - opositeSide);
+//   line(width/2, height/2, width/2 + adjacentSide, height/2 - opositeSide);
+//   console.log(mouseX);
+// }
 
 // let a = 0.0;
 // let inc = TWO_PI / 25.0;
