@@ -12,34 +12,51 @@ let radius = diameter/2;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  angleMode(DEGREES);
 }
 
 function draw() {
   background(220);
-  drawShape();
-  calculatePoint(mouseX);
+  // drawShape();
+  calculatePoints();
 }
 
-function drawShape() {
-  circle(width/2, height/2, diameter);
-  strokeWeight(5);
-  point(width/2, height/2);
-  strokeWeight(1);
+function displayShape() {
+  beginShape();
+  vertex();
+  endShape();
 }
 
-function calculatePoint(angle) {
-  angleMode(DEGREES);
-  strokeWeight(5);
-  let adjacentSide = radius * cos(angle);
-  let opositeSide = radius * sin(angle);
-  point(width/2 + adjacentSide, height/2 - opositeSide);
-  console.log(mouseX);
-  strokeWeight(1);
+function calculatePoints() {
+  let angle = 0;
+  for (let i = 0; i < 24; i ++) {
+    strokeWeight(5);
+    let adjacentSide = radius * cos(angle);
+    let opositeSide = radius * sin(angle);
+    point(width/2 + adjacentSide, height/2 - opositeSide);
+    console.log(mouseX);
+    strokeWeight(1); 
+    angle += 360/24;
+  }
 }
 
-function drawCircle(theAngle) {
-
+function displayPoints() {
+  let point = {
+    x: 
+  };
 }
+
+
+
+// function calculatePoint(angle) {
+//   angleMode(DEGREES);
+//   strokeWeight(5);
+//   let adjacentSide = radius * cos(angle);
+//   let opositeSide = radius * sin(angle);
+//   point(width/2 + adjacentSide, height/2 - opositeSide);
+//   console.log(mouseX);
+//   strokeWeight(1);
+// }
 
 // beginShape();
 // vertex(100, 100);
