@@ -4,6 +4,7 @@
 -[Moving Rectangle]()
 -[Generitive Art](Generative Art)
 -[Terrain Generation](07-terrain)
+-[Perlin and Timing](08-perlin)
 
 ## Projects
 - [Arrays and Object Notation](array-assignment)
