@@ -13,40 +13,56 @@ let radius = diameter/2;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
+  for (let i = 0; i < 50; i ++) {
+    displayPoints(width/2, height/2, i);
+  }
 }
 
 function draw() {
-  background(220);
-  // drawShape();
+  //background(220);
   calculatePoints();
-}
-
-function displayShape() {
-  beginShape();
-  vertex();
-  endShape();
 }
 
 function calculatePoints() {
   let angle = 0;
-  for (let i = 0; i < 24; i ++) {
-    strokeWeight(5);
-    let adjacentSide = radius * cos(angle);
-    let opositeSide = radius * sin(angle);
-    point(width/2 + adjacentSide, height/2 - opositeSide);
-    console.log(mouseX);
-    strokeWeight(1); 
-    angle += 360/24;
+    for (let i = 0; i < 24; i ++) {
+      strokeWeight(5);
+      let adjacentSide = radius * cos(angle);
+      let opositeSide = radius * sin(angle);
+      point(width/2 + adjacentSide + random(a*2), height/2 - opositeSide + random(a*2));
+      strokeWeight(1); 
+      angle += 360/24;
+    }
+}
+
+function displayPoints(theX, theY, howRandom) {
+  let Points = {
+    x: theX,
+    y: theY,
+    randomFactor: howRandom
   }
+  circles.push(Points);
 }
 
-function displayPoints() {
-  let point = {
-    x: 
-  };
-}
+// function displayPoints(theAngle) {
+//   let points = {
+//     angle: theAngle
+//   };
+//   circles.push(points);
+// }
 
-
+// function calculatePoints() {
+//   let angle = 0;
+//   for (let i = 0; i < 24; i ++) {
+//     strokeWeight(5);
+//     let adjacentSide = radius * cos(angle);
+//     let opositeSide = radius * sin(angle);
+//     point(width/2 + adjacentSide, height/2 - opositeSide);
+//     console.log(mouseX);
+//     strokeWeight(1); 
+//     angle += 360/24;
+//   }
+// }
 
 // function calculatePoint(angle) {
 //   angleMode(DEGREES);

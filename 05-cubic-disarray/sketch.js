@@ -30,7 +30,7 @@ function displayBox(myBox) {
   translate(myBox.x, myBox.y);
   rotate(myBox.rotation);
   square(0, 0, myBox.size);
-  pop(); //reseting the transformtion matrix
+  pop(); //reseting the transformation matrix
 }
 
 function spawnBox(theX, theY, theSize, howRotated) {
