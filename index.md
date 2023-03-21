@@ -5,6 +5,7 @@
 -[Generitive Art](Generative Art)
 -[Terrain Generation](07-terrain)
 -[Perlin and Timing](08-perlin)
+-[Color Game](10-color-game)
 
 ## Projects
 - [Arrays and Object Notation](array-assignment)
