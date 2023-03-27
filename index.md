@@ -7,6 +7,7 @@
 -[Perlin and Timing](08-perlin)
 -[Color Game](10-color-game)
 -[Game of life](11-color-game)
+-[Character movement](12character-movement)
 
 ## Projects
 - [Arrays and Object Notation](array-assignment)
