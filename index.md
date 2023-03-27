@@ -10,3 +10,4 @@
 
 ## Projects
 - [Arrays and Object Notation](array-assignment)
+- [2D Array assignment](2D-array-assignement)
