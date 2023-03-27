@@ -1,5 +1,5 @@
-// Character Moving in Grid
-// Schellenberg
+// 2D array assignement
+// Edvin Jouband
 // March 27, 2023
 
 let grid;
@@ -10,13 +10,13 @@ let cellSize;
 let characterX = 0;
 let characterY = 0;
 
-let grassImg;
-let pavingImg;
+// let grassImg;
+// let pavingImg;
 
-function preload() {
-  grassImg = loadImage("grass2.png");
-  pavingImg = loadImage("paving1.png");
-}
+// function preload() {
+//   grassImg = loadImage("grass2.png");
+//   pavingImg = loadImage("paving1.png");
+// }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -94,19 +94,17 @@ function displayGrid() {
   for (let y = 0; y < ROWS; y++) {
     for (let x = 0; x < COLS; x++) {
       if (grid[y][x] === 1) {
-        // fill("black");
-        // rect(x * cellSize, y * cellSize, cellSize, cellSize);
-        image(grassImg, x * cellSize, y * cellSize, cellSize, cellSize);
+        fill("black");
+        //rect(x * cellSize, y * cellSize, cellSize, cellSize);
       }
       else if (grid[y][x] === 0) {
-        // fill("white");
-        // rect(x * cellSize, y * cellSize, cellSize, cellSize);
-        image(pavingImg, x * cellSize, y * cellSize, cellSize, cellSize);
+        fill("white");
+        //rect(x * cellSize, y * cellSize, cellSize, cellSize);
       }
       else if (grid[y][x] === 9) {
         fill("red");
-        rect(x * cellSize, y * cellSize, cellSize, cellSize);
       }
+      rect(x * cellSize, y * cellSize, cellSize, cellSize);
       
     }
   }
