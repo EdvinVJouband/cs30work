@@ -1,14 +1,15 @@
 // 2D array assignement
 // Edvin Jouband
 // March 27, 2023
+// Coding train, A* in P5 js
 
 let grid;
 
-const ROWS = 20;
-const COLS = 20;
+const ROWS = 11;
+const COLS = 11;
 let cellSize;
-let characterX = 0;
-let characterY = 0;
+let characterX = 5;
+let characterY = 5;
 
 // let grassImg;
 // let pavingImg;
