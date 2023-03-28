@@ -1,9 +1,15 @@
 // 2D array assignement
 // Edvin Jouband
 // March 27, 2023
-// Coding train, A* in P5 js
+// Coding train, A* in P5 js, 21 min 21 sec
 
 let grid;
+
+let openSet;
+let closedSet;
+
+let start;
+let end;
 
 const ROWS = 11;
 const COLS = 11;
@@ -34,9 +40,34 @@ function setup() {
   }
 }
 
+start = grid[0][0];
+end = grid[COLS - 1][ROWS - 1];
+
+openSet.push(start);
+
 function draw() {
   background(220);
+  A_Star;
   displayGrid();
+}
+
+function A_Star() {
+  if(openSet.length > 0) {
+    // keep going
+  }
+  else {
+    // no solution
+
+  }
+
+  //make the cells change color as they are checked
+  for (let i = 0; i < closedSet.length; i ++) {
+    closedSet[i].
+  }
+
+  for (let i = 0; i < openSet.length; i ++) {
+    
+  }
 }
 
 function keyTyped() {
