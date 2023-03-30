@@ -46,18 +46,18 @@ end = grid[COLS - 1][ROWS - 1];
 openSet.push(start);
 }
 
-function displayCell() {
+function draw() {
+  background(220);
+  A_Star;
+  displayGrid();
+}
+
+function storeCellValues() {
   let cell = {
     theF: 0,
     theG: 0,
     theH: 0,
   }
-}
-
-function draw() {
-  background(220);
-  A_Star;
-  displayGrid();
 }
 
 function A_Star() {
@@ -139,7 +139,7 @@ function displayGrid(cellColor) {
         //rect(x * cellSize, y * cellSize, cellSize, cellSize);
       }
       else if (grid[y][x] === 0) {
-        fill(CellColor);
+        fill(cellColor);
         //rect(x * cellSize, y * cellSize, cellSize, cellSize);
       }
       else if (grid[y][x] === 9) {
