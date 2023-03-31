@@ -4,34 +4,16 @@
 //  The Coding Train, A* in P5 js, 21 min 21 sec
 // https://www.youtube.com/watch?v=aKYlikFAV4k
 
-let grid;
-
-let openSet;
-let closedSet;
-
-let start;
-let end;
-
-const ROWS = 11;
-const COLS = 11;
+let openSet = [], closedSet = [];
+let start, end;
+const ROWS = 5;
+const COLS = 5;
 let cellSize;
-let characterX = 5;
-let characterY = 5;
-
-// let grassImg;
-// let pavingImg;
-
-// function preload() {
-//   grassImg = loadImage("grass2.png");
-//   pavingImg = loadImage("paving1.png");
-// }
+let grid = new Array(COLS);
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  grid = createRandomGrid(ROWS, COLS);
-
-  //put player in grid
-  grid[characterY][characterX] = 9; //I'm using 9 for the character
+  createGrid();
 
   if (width < height) {
     cellSize = width/ROWS;
@@ -40,10 +22,10 @@ function setup() {
     cellSize = height/ROWS;
   }
 
-start = grid[0][0];
-end = grid[COLS - 1][ROWS - 1];
+  start = grid[0][0];
+  end = grid[COLS - 1][ROWS - 1];
 
-openSet.push(start);
+  openSet.push(start);
 }
 
 function draw() {
@@ -52,14 +34,14 @@ function draw() {
   displayGrid();
 }
 
-function storeCellValues() {
+function creatCell(x, y) {
   let cell = {
-    theX: 
-    theY: 
+    theX: x,
+    theY: y,
     theF: 0,
     theG: 0,
     theH: 0,
-  }
+  };
 }
 
 function A_Star() {
@@ -68,17 +50,14 @@ function A_Star() {
   }
   else {
     // no solution
-
   }
-
   //make the cells change color as they are checked
-  for (let i = 0; i < closedSet.length; i ++) {
-    closedSet[i].
-  }
+  //   for (let i = 0; i < closedSet.length; i ++) {
 
-  for (let i = 0; i < openSet.length; i ++) {
-    
-  }
+  //   }
+  //  for (let i = 0; i < openSet.length; i ++) { 
+
+//   }
 }
 
 function displayGrid(cellColor) {
@@ -101,73 +80,14 @@ function displayGrid(cellColor) {
   }
 }
 
-function createRandomGrid(ROWS, COLS) {
-  let newGrid = [];
+function createGrid(ROWS, COLS) {
+  // making 2d array
   for (let y = 0; y < ROWS; y++) {
-    newGrid.push([]);
+    grid[y] = new Array(ROWS);
     for (let x = 0; x < COLS; x++) {
-      if (random(100) < 50) {
-        newGrid[y].push(1);
-      }
-      else {
-        newGrid[y].push(0);
-      }
-      //figure this out later
-      newGrid[y][x] =
+      creatCell;
+      newGrid[y][x] = cell;
     }
   }
   return newGrid;
 }
-
-// function keyTyped() {
-//   if (key === "r") {
-//     grid = createRandomGrid(ROWS, COLS);
-//   }
-//   if (key === "s") { //move down
-//     moveCharacter(0, 1);
-//   }
-//   if (key === "w") { //move up
-//     moveCharacter(0, -1);
-//   }
-//   if (key === "d") { //move right
-//     moveCharacter(1, 0);
-//   }
-//   if (key === "a") { //move left
-//     moveCharacter(-1, 0);
-//   }
-// }
-
-// function moveCharacter(x, y) {
-//   //sanity check for edge cases
-//   if (characterX + x >= 0 && characterX + x < COLS &&
-//       characterY + y >= 0 && characterY + y < ROWS) {
-    
-//     //check if going to hit wall
-//     if (grid[characterY+y][characterX+x] === 0) {
-//       let tempX = characterX;
-//       let tempY = characterY;
-    
-//       characterX += x;
-//       characterY += y;
-    
-//       //update grid
-//       grid[characterY][characterX] = 9;
-//       grid[tempY][tempX] = 0;
-//     }
-
-//   }
-// }
-
-// function mousePressed() {
-//   let x = Math.floor(mouseX/cellSize);
-//   let y = Math.floor(mouseY/cellSize);
-
-//   if (grid[y][x] === 0) {
-//     grid[y][x] = 1;
-//   }
-
-//   else if (grid[y][x] === 1) {
-//     grid[y][x] = 0;
-//   }
-// }
-
