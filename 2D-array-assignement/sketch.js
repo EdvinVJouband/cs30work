@@ -6,14 +6,18 @@
 
 let openSet = [], closedSet = [];
 let start, end;
+
 const ROWS = 5;
 const COLS = 5;
+
 let cellSize;
+
 let grid = new Array(COLS);
+
+let w, h;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  createGrid();
 
   if (width < height) {
     cellSize = width/ROWS;
@@ -21,6 +25,11 @@ function setup() {
   else {
     cellSize = height/ROWS;
   }
+
+  w = cellSize/COLS;
+  h = cellSize/ROWS;
+
+  createGrid();
 
   start = grid[0][0];
   end = grid[COLS - 1][ROWS - 1];
@@ -34,60 +43,58 @@ function draw() {
   displayGrid();
 }
 
-function creatCell(x, y) {
-  let cell = {
-    theX: x,
-    theY: y,
-    theF: 0,
-    theG: 0,
-    theH: 0,
-  };
+class Cell {
+  constructor(i, j) {
+    this.x = i;
+    this.y = j;
+    this.f = 0;
+    this.g = 0;
+    this.h = 0;
+
+    this.show = function () {
+      fill(255);
+      stroke(0);
+      rect(this.x * w, this.y * h, w - 1, h - 1);
+    };
+  }
 }
 
 function A_Star() {
-  if (openSet.length > 0) {
-    // keep going
-  }
-  else {
-    // no solution
-  }
-  //make the cells change color as they are checked
-  //   for (let i = 0; i < closedSet.length; i ++) {
-
-  //   }
-  //  for (let i = 0; i < openSet.length; i ++) { 
-
+//   if (openSet.length > 0) {
+//     // keep going
 //   }
+//   else {
+//     // no solution
+//   }
+//   //make the cells change color as they are checked
+//   //   for (let i = 0; i < closedSet.length; i ++) {
+
+//   //   }
+//   //  for (let i = 0; i < openSet.length; i ++) { 
+
+// //   }
 }
 
 function displayGrid(cellColor) {
-  for (let y = 0; y < ROWS; y++) {
-    for (let x = 0; x < COLS; x++) {
-      if (grid[y][x] === 1) {
-        fill(cellColor);
-        //rect(x * cellSize, y * cellSize, cellSize, cellSize);
-      }
-      else if (grid[y][x] === 0) {
-        fill(cellColor);
-        //rect(x * cellSize, y * cellSize, cellSize, cellSize);
-      }
-      else if (grid[y][x] === 9) {
-        fill("red");
-      }
-      rect(x * cellSize, y * cellSize, cellSize, cellSize);
+  for (let i = 0; i < COLS; i++) {
+    for (let j = 0; j < ROWS; j++) {
+        grid[i][j].show();
       
-    }
+    } 
   }
 }
 
-function createGrid(ROWS, COLS) {
+//rect(x * cellSize, y * cellSize, cellSize, cellSize);
+
+function createGrid() {
   // making 2d array
-  for (let y = 0; y < ROWS; y++) {
-    grid[y] = new Array(ROWS);
-    for (let x = 0; x < COLS; x++) {
-      creatCell;
-      newGrid[y][x] = cell;
+  for (let i = 0; i < COLS; i++) {
+    grid[i] = new Array(ROWS);
+    }
+
+  for (let i = 0; i < COLS; i++) {
+    for (let j = 0; j < ROWS; j++) {
+      grid[i][j] = new Cell(i,j);
     }
   }
-  return newGrid;
 }
