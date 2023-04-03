@@ -6,15 +6,9 @@
 
 let openSet = [], closedSet = [];
 let start, end;
-
-const ROWS = 5;
-const COLS = 5;
-
+const ROWS = 5, COLS = 5;
 let cellSize;
-
 let grid = new Array(COLS);
-
-let w, h;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -26,9 +20,6 @@ function setup() {
     cellSize = height/ROWS;
   }
 
-  w = cellSize/COLS;
-  h = cellSize/ROWS;
-
   createGrid();
 
   start = grid[0][0];
@@ -39,8 +30,9 @@ function setup() {
 
 function draw() {
   background(220);
-  A_Star;
+  A_Star();
   displayGrid();
+  displayCells();
 }
 
 class Cell {
@@ -50,51 +42,91 @@ class Cell {
     this.f = 0;
     this.g = 0;
     this.h = 0;
+    this.neighbors = [];
 
-    this.show = function () {
-      fill(255);
-      stroke(0);
-      rect(this.x * w, this.y * h, w - 1, h - 1);
+    this.show = function (cellColor) {
+      fill(cellColor);
+      noStroke();
+      rect(this.x * cellSize, this.y * cellSize, cellSize - 1, cellSize - 1);
+    };
+
+    this.addNeighbors = function(grid) {
+      let i = this.i;
+      let j = this.j;
+      if (i < COLS - 1) {
+        this.neighbors.push(grid[i + 1, j]);
+      }
+      if (i > 0) {
+        this.neighbors.push(grid[i - 1, j]);
+      }
+      this.neighbors.push(grid[i, j + 1]);
+      this.neighbors.push(grid[i, j - 1]);
     };
   }
 }
 
+function removeFromArray(arr, elt){
+  for (let i = arr.length - 1; i >= 0; i --) {
+    if (arr[i] === elt) {
+      arr.splice(i, 1);
+    }
+  }
+}
+
 function A_Star() {
-//   if (openSet.length > 0) {
-//     // keep going
-//   }
-//   else {
-//     // no solution
-//   }
-//   //make the cells change color as they are checked
-//   //   for (let i = 0; i < closedSet.length; i ++) {
+  if (openSet.length > 0) {
 
-//   //   }
-//   //  for (let i = 0; i < openSet.length; i ++) { 
+    let winner = 0;
+    for (let i = 0; i < openSet.length; i ++) {
+      if (openSet[i].f < openSet[winner].f) {
+        winner = i;
+      }
+    }
+    let current = openSet[winner];
 
-// //   }
+    if (openSet[winner] === end) {
+      console.log("DONE");
+    }
+
+    removeFromArray(openSet, current);
+    closedSet.push(current);
+
+    // keep going
+  }
+  else {
+    // no solution
+  }
 }
 
 function displayGrid(cellColor) {
+  //display grid
   for (let i = 0; i < COLS; i++) {
     for (let j = 0; j < ROWS; j++) {
-        grid[i][j].show();
+      grid[i][j].show(color(255));
       
     } 
   }
 }
 
-//rect(x * cellSize, y * cellSize, cellSize, cellSize);
-
 function createGrid() {
   // making 2d array
   for (let i = 0; i < COLS; i++) {
     grid[i] = new Array(ROWS);
-    }
+  }
 
   for (let i = 0; i < COLS; i++) {
     for (let j = 0; j < ROWS; j++) {
       grid[i][j] = new Cell(i,j);
     }
+  }
+}
+
+function displayCells() {
+  // set the color of the cells
+  for (let i = 0; i < closedSet.length; i ++) {
+    closedSet[i].show(color(255, 0, 0));
+  }
+  for (let i = 0; i < openSet.length; i ++) {
+    openSet[i].show(color(0, 255, 0));
   }
 }
