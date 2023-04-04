@@ -6,7 +6,7 @@
 
 let openSet = [], closedSet = [];
 let start, end;
-const ROWS = 5, COLS = 5;
+const ROWS = 25, COLS = 25;
 let cellSize;
 let grid = new Array(COLS);
 
@@ -37,30 +37,35 @@ function draw() {
 
 class Cell {
   constructor(i, j) {
-    this.x = i;
-    this.y = j;
+    this.i = i;
+    this.j = j;
     this.f = 0;
     this.g = 0;
     this.h = 0;
     this.neighbors = [];
+    this.previous = undefined;
 
     this.show = function (cellColor) {
       fill(cellColor);
       noStroke();
-      rect(this.x * cellSize, this.y * cellSize, cellSize - 1, cellSize - 1);
+      rect(this.i * cellSize, this.j * cellSize, cellSize - 1, cellSize - 1);
     };
 
     this.addNeighbors = function(grid) {
       let i = this.i;
       let j = this.j;
       if (i < COLS - 1) {
-        this.neighbors.push(grid[i + 1, j]);
+        this.neighbors.push(grid[i + 1][j]);
       }
       if (i > 0) {
-        this.neighbors.push(grid[i - 1, j]);
+        this.neighbors.push(grid[i - 1][j]);
       }
-      this.neighbors.push(grid[i, j + 1]);
-      this.neighbors.push(grid[i, j - 1]);
+      if (j < ROWS - 1) {
+        this.neighbors.push(grid[i][j + 1]);
+      }
+      if (j > 0) {
+        this.neighbors.push(grid[i][j - 1]);
+      }
     };
   }
 }
@@ -71,6 +76,11 @@ function removeFromArray(arr, elt){
       arr.splice(i, 1);
     }
   }
+}
+
+function heuristic(a, b) {
+  let d = dist(a.i, a.j, b.i, b.j);
+  return d;
 }
 
 function A_Star() {
@@ -90,6 +100,31 @@ function A_Star() {
 
     removeFromArray(openSet, current);
     closedSet.push(current);
+
+    let neighbors = current.neighbors;
+    for (let i = 0; i < neighbors.length; i ++) {
+      let neighbor = neighbors[i];
+
+      if (!closedSet.includes(neighbor)) {
+        let tempG = current.g + 1;
+
+        if (openSet.includes(neighbor)) {
+          if (tempG < neighbor.g) {
+            neighbor.g = tempG;
+          }
+        }
+        else {
+          neighbor.g = tempG;
+          openSet.push(neighbor);
+        }
+
+        neighbor.h = heuristic(neighbor, end);
+        neighbor.f = neighbor.g + neighbor.h;
+        neighbor.previous = current;
+
+
+      }
+    }
 
     // keep going
   }
@@ -117,6 +152,12 @@ function createGrid() {
   for (let i = 0; i < COLS; i++) {
     for (let j = 0; j < ROWS; j++) {
       grid[i][j] = new Cell(i,j);
+    }
+  }
+
+  for (let i = 0; i < COLS; i++) {
+    for (let j = 0; j < ROWS; j++) {
+      grid[i][j].addNeighbors(grid);
     }
   }
 }
