@@ -97,13 +97,13 @@ function A_Star() {
 
     if (current === end) {
       // find the path
-      path = [];
-      let temp = current;
-      path.push(temp);
-      while (temp.previous) {
-        path.push(temp.previous);
-        temp = temp.previous;
-      }
+      // path = [];
+      // let temp = current;
+      // path.push(temp);
+      // while (temp.previous) {
+      //   path.push(temp.previous);
+      //   temp = temp.previous;
+      // }
       noLoop();
       console.log("DONE");
     }
@@ -141,6 +141,7 @@ function A_Star() {
   else {
     // no solution
   }
+  return current;
 }
 
 function displayGrid(cellColor) {
@@ -172,7 +173,7 @@ function createGrid() {
   }
 }
 
-function displayCells() {
+function displayCells(current) {
   // set the color of the cells
   for (let i = 0; i < closedSet.length; i ++) {
     closedSet[i].show(color(255, 0, 0));
@@ -181,7 +182,6 @@ function displayCells() {
     openSet[i].show(color(0, 255, 0));
   }
 
-  // need to gind away to access the variable current from the A_Star function
   path = [];
   let temp = current;
   path.push(temp);
