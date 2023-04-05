@@ -9,6 +9,7 @@ let start, end;
 const ROWS = 25, COLS = 25;
 let cellSize;
 let grid = new Array(COLS);
+let path = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -94,7 +95,16 @@ function A_Star() {
     }
     let current = openSet[winner];
 
-    if (openSet[winner] === end) {
+    if (current === end) {
+      // find the path
+      path = [];
+      let temp = current;
+      path.push(temp);
+      while (temp.previous) {
+        path.push(temp.previous);
+        temp = temp.previous;
+      }
+      noLoop();
       console.log("DONE");
     }
 
@@ -169,5 +179,18 @@ function displayCells() {
   }
   for (let i = 0; i < openSet.length; i ++) {
     openSet[i].show(color(0, 255, 0));
+  }
+
+  // need to gind away to access the variable current from the A_Star function
+  path = [];
+  let temp = current;
+  path.push(temp);
+  while (temp.previous) {
+    path.push(temp.previous);
+    temp = temp.previous;
+  }
+
+  for (let i = 0; i < path.length; i ++) {
+    path[i].show(color(0, 0, 255));
   }
 }
