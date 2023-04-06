@@ -10,6 +10,7 @@ const ROWS = 25, COLS = 25;
 let cellSize;
 let grid = new Array(COLS);
 let path = [];
+let globalCurrent = 0;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -32,8 +33,9 @@ function setup() {
 function draw() {
   background(220);
   A_Star();
+  globalCurrent = A_Star();
   displayGrid();
-  displayCells();
+  displayCells(globalCurrent);
 }
 
 class Cell {
@@ -106,6 +108,7 @@ function A_Star() {
       // }
       noLoop();
       console.log("DONE");
+      return current;
     }
 
     removeFromArray(openSet, current);
@@ -141,7 +144,6 @@ function A_Star() {
   else {
     // no solution
   }
-  return current;
 }
 
 function displayGrid(cellColor) {
