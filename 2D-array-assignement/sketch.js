@@ -3,6 +3,7 @@
 // March 27, 2023
 //  The Coding Train, A* in P5 js, 21 min 21 sec
 // https://www.youtube.com/watch?v=aKYlikFAV4k
+// https://www.youtube.com/watch?v=EaZxUCWAjb0&t=0s
 
 let openSet = [], closedSet = [];
 let start, end;
@@ -10,7 +11,8 @@ const ROWS = 25, COLS = 25;
 let cellSize;
 let grid = new Array(COLS);
 let path = [];
-let globalCurrent = 0;
+let nosolution = false;
+let solution = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -26,16 +28,20 @@ function setup() {
 
   start = grid[0][0];
   end = grid[COLS - 1][ROWS - 1];
+  start.wall = false;
+  end.wall = false;
 
   openSet.push(start);
 }
 
 function draw() {
   background(220);
-  A_Star();
-  globalCurrent = A_Star();
+  A_Star(solution);
+  if (solution === true) {
+    noLoop();
+  }
   displayGrid();
-  displayCells(globalCurrent);
+  displayCells();
 }
 
 class Cell {
@@ -47,9 +53,17 @@ class Cell {
     this.h = 0;
     this.neighbors = [];
     this.previous = undefined;
+    this.wall = false;
+
+    if (random(1) < 0.3) {
+      this.wall = true;
+    }
 
     this.show = function (cellColor) {
       fill(cellColor);
+      if (this.wall) {
+        fill(0);
+      }
       noStroke();
       rect(this.i * cellSize, this.j * cellSize, cellSize - 1, cellSize - 1);
     };
@@ -82,7 +96,8 @@ function removeFromArray(arr, elt){
 }
 
 function heuristic(a, b) {
-  let d = dist(a.i, a.j, b.i, b.j);
+  // let d = dist(a.i, a.j, b.i, b.j);
+  let d = abs(a.i - b.i) + abs(a.j - b.j);
   return d;
 }
 
@@ -98,17 +113,16 @@ function A_Star() {
     let current = openSet[winner];
 
     if (current === end) {
-      // find the path
-      // path = [];
-      // let temp = current;
-      // path.push(temp);
-      // while (temp.previous) {
-      //   path.push(temp.previous);
-      //   temp = temp.previous;
-      // }
+      //find the path
+      path = [];
+      let temp = current;
+      path.push(temp);
+      while (temp.previous) {
+        path.push(temp.previous);
+        temp = temp.previous;
+      }
       noLoop();
       console.log("DONE");
-      return current;
     }
 
     removeFromArray(openSet, current);
@@ -118,7 +132,7 @@ function A_Star() {
     for (let i = 0; i < neighbors.length; i ++) {
       let neighbor = neighbors[i];
 
-      if (!closedSet.includes(neighbor)) {
+      if (!closedSet.includes(neighbor) && !neighbor.wall) {
         let tempG = current.g + 1;
 
         if (openSet.includes(neighbor)) {
@@ -142,11 +156,16 @@ function A_Star() {
     // keep going
   }
   else {
+    console.log('no solution');
+    nosolution = true;
+    return(true);
+    // noLoop();
+
     // no solution
   }
 }
 
-function displayGrid(cellColor) {
+function displayGrid() {
   //display grid
   for (let i = 0; i < COLS; i++) {
     for (let j = 0; j < ROWS; j++) {
@@ -175,7 +194,7 @@ function createGrid() {
   }
 }
 
-function displayCells(current) {
+function displayCells() {
   // set the color of the cells
   for (let i = 0; i < closedSet.length; i ++) {
     closedSet[i].show(color(255, 0, 0));
@@ -184,13 +203,36 @@ function displayCells(current) {
     openSet[i].show(color(0, 255, 0));
   }
 
-  path = [];
-  let temp = current;
-  path.push(temp);
-  while (temp.previous) {
-    path.push(temp.previous);
-    temp = temp.previous;
-  }
+if (!nosolution) {
+    let winner = 0;
+    for (let i = 0; i < openSet.length; i ++) {
+      if (openSet[i].f < openSet[winner].f) {
+        winner = i;
+      }
+    }
+    let current = openSet[winner];
+
+    if (current === end) {
+      //find the path
+      path = [];
+      let temp = current;
+      path.push(temp);
+      while (temp.previous) {
+        path.push(temp.previous);
+        temp = temp.previous;
+      }
+      noLoop();
+      console.log("DONE");
+    }
+
+    path = [];
+    let temp = current;
+    path.push(temp);
+    while (temp.previous) {
+      path.push(temp.previous);
+      temp = temp.previous;
+    }
+}
 
   for (let i = 0; i < path.length; i ++) {
     path[i].show(color(0, 0, 255));
