@@ -9,7 +9,8 @@
 -[Game of life](11-color-game)
 -[Character movement](12character-movement)
 -[Sudoku](13-sudoku)
--[Gmae of life scrible](scrible demo);
+-[Game of life scrible](scrible demo);
+-[Walker OOP](16-walker)
 
 ## Projects
 - [Arrays and Object Notation](array-assignment)
