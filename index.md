@@ -11,6 +11,7 @@
 -[Sudoku](13-sudoku)
 -[Game of life scrible](scrible demo);
 -[Walker OOP](16-walker)
+-[Fireworks OOP](17-fireworks)
 
 ## Projects
 - [Arrays and Object Notation](array-assignment)
