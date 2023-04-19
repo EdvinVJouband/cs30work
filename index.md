@@ -12,6 +12,7 @@
 -[Game of life scrible](scrible demo);
 -[Walker OOP](16-walker)
 -[Fireworks OOP](17-fireworks)
+-[Ball Array OOP](19-ball-array)
 
 ## Projects
 - [Arrays and Object Notation](array-assignment)
