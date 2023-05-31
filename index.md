@@ -14,6 +14,8 @@
 -[Fireworks OOP](17-fireworks)
 -[Ball Array OOP](19-ball-array)
 -[Using timers](21-timers)
+-[Fractal circles](23-fractalcricles)
+-[Sierpinski Triangle](25-sierpinski)
 
 ## Projects
 - [Arrays and Object Notation](array-assignment)
